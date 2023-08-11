@@ -6,5 +6,4 @@ const withNextra = require('nextra')({
 module.exports = {
   ...withNextra(),
   basePath: '/docs',
-  trailingSlash: false
 }
