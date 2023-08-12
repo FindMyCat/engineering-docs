@@ -1,10 +1,19 @@
 {
   "index": "Start here",
-  "Software": "All Software",
-  "---": {
-    "type": "text"
+  "--- Software": {
+    "type": "separator",
+    "title": "All Software"
   },
-  "Hardware": "All Hardware",
+  "Embedded": "Embedded Software",
+  "CloudSetup": "Cloud Setup",
+  "iOSApplication": "iOS Application",
+  "--- Hardware": {
+    "type": "separator",
+    "title": "All Hardware"
+  },
+  "CircuitBoard": "FindMyCat PCB",
+  "DeviceChassis": "Chassis",
+  "FinalAssembly": "Final Assembly",
   "about": {
     "title": "About",
     "type": "page"
