@@ -1,0 +1,78 @@
+import ImageProvider from "../../ImageProvider";
+import enableMqttSNPluginLight from './images/EnableMqttSnPluginLight.png'
+import enableMqttSNPluginDark from './images/EnableMqttSnPluginDark.png'
+import MqttSNPluginListeningLight from './images/MqttSNPluginListeningLight.png'
+import MqttSNPluginListeningDark from './images/MqttSNPluginListeningDark.png'
+import MQTTSNTraccarLight from './images/MQTTSN-TraccarLight.png'
+import MQTTSNTraccarDark from './images/MQTTSN-TraccarDark.png'
+import CreateWebhook from './images/CreateWebhook.png'
+import RuleConfigLight from './images/RuleConfigLight.png'
+import RuleConfigActionLight from './images/RuleConfigActionLight.png'
+import RuleConfigActionDark from './images/RuleConfigActionDark.png'
+import RuleConfigDark from './images/RuleConfigDark.png'
+
+# EMQX Configuration
+
+In EMQX, the option to export settings/configurations is only available in Enterprise mode. The following configurations need to be manually set up:
+- MQTT-SN Gateway
+- Rule Engine
+- Rule Engine Action
+
+After enabling the above configuration the following pipline will be created:
+<br/>
+<br/>
+
+<ImageProvider lightImage={MQTTSNTraccarLight} darkImage={MQTTSNTraccarDark}/>
+
+<br/>
+#### Enable MQTT-SN Gateway
+
+1. Navigate to the EMQX Dashboard (port `18083`). Under /plugins find `emqx_sn` plugin and enable it.
+
+<ImageProvider lightImage={enableMqttSNPluginLight} darkImage={enableMqttSNPluginDark}/>
+
+2. MQTT-SN listens over UDP protocol; make sure the port `1885` is listening.
+
+<ImageProvider lightImage={MqttSNPluginListeningLight} darkImage={MqttSNPluginListeningDark}/>
+
+
+#### Create Webhook Resource
+
+1. Create a webhook resource for Traccar port `5055`. Use the following config:
+
+<ImageProvider lightImage={CreateWebhook} darkImage={CreateWebhook}/>
+
+#### Configure Rule Engine
+
+##### Create Rule
+
+Paste the following SQL query in the Rule Condition SQL
+
+```sql copy
+SELECT
+  nth(1, split(payload.msg, ',')) as latitude,
+  nth(2, split(payload.msg, ',')) as longitude,
+  nth(3, split(payload.msg, ',')) as satellites,
+  nth(4, split(payload.msg, ',')) as accuracy,
+  clientid
+FROM
+  "/location"
+```
+This tells the Rule engine to listen on topic `/location` for any messages and extract the `latitude`, `longitude`, `satellites`, `accuracy`
+to be passed over to the webhook that makes the `POST` request.
+
+##### Add Rule Action
+Click on Create Action, and Select `Data to Web Server` option. For the Resource, select the webhook you created in the above step.
+
+Paste this for the `body` of the POST request:
+
+``` shell copy
+id=${clientid}&lat=${latitude}&lon=${longitude}&accuracy=${accuracy}&sat=${satellites}&batt=${batt_lvl}
+```
+
+<ImageProvider lightImage={RuleConfigLight} darkImage={RuleConfigDark}/>
+<ImageProvider lightImage={RuleConfigActionLight} darkImage={RuleConfigActionDark}/>
+
+
+Done 👍 MQTT-SN -> Traccar pipeline should now work.
+
