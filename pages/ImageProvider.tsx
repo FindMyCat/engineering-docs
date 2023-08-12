@@ -15,3 +15,6 @@ export const ImageProvider = (props: OwnProps) => {
         return <Image src={props.darkImage} alt={"Dark Image"}/>
     }
 }
+
+
+export default ImageProvider;
