@@ -1,0 +1,66 @@
+import {ImageProvider} from "../ImageProvider";
+import cloudOverviewImageLight from "./images/CloudSetupOverviewLight.png"
+import cloudOverviewImageDark from "./images/CloudSetupOverviewDark.png"
+
+The software's cloud segment consists of two primary components:
+
+- Traccar GPS Server
+- EMQX MQTT Broker
+
+The embedded software establishes communication via MQTT-SN with the MQTT-SN Gateway within EMQX MQTT broker.
+Each time a device transmits a message to the MQTT-SN gateway (over MQTT-SN protocol), a predefined rule is activated.
+This rule extracts pertinent device information like location coordinates, battery percentage, GPS accuracy etc
+and subsequently relays the message to the Traccar REST server utilizing the HTTP protocol.
+
+
+<br/>
+<br/>
+<br/>
+
+<ImageProvider lightImage={cloudOverviewImageLight} darkImage={cloudOverviewImageDark}/>
+
+<br/>
+
+<i> Following instructions assume you are using Amazon Linux 2; the documentation for self-hosting using Ubuntu/Debian is in progress.</i>
+
+#### Setup EMQX
+
+1. Download EMQX <code>v4.4.19</code>
+```shell copy
+wget https://www.emqx.com/en/downloads/broker/4.4.19/emqx-4.4.19-otp24.3.4.2-1-amzn2-amd64.rpm
+```
+
+2. Install EMQX
+``` shell copy
+sudo yum install emqx-4.4.19-otp24.3.4.2-1-amzn2-amd64.rpm -y
+```
+
+3. Start EMQX
+``` shell copy
+sudo systemctl start emqx
+```
+
+4. You should see EMQX Dashboard UI on port `18083`. (`https://Your_AWS_Public_DNS:18083`)
+
+#### Setup Traccar GPS Server
+
+1. Download Traccar server <code>v5.8</code> and extract
+```shell copy
+wget https://github.com/traccar/traccar/releases/download/v5.8/traccar-linux-64-5.8.zip
+unzip traccar-linux-64-5.8.zip
+```
+
+2. Execute <strong>traccar.run</strong> file
+``` shell copy
+cd traccar-linux-64-5.8
+sudo ./traccar.run
+```
+
+3. Start Traccar service
+``` shell copy
+sudo systemctl start traccar
+```
+
+4. You should see the Traccar UI on port `8082` (`https://Your_AWS_Public_DNS:8082`)
+
+

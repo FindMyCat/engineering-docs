@@ -10,6 +10,11 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'FindMyCat by ChitlangeSahas',
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – FindMyCat'
+    }
+  }
 }
 
 export default config

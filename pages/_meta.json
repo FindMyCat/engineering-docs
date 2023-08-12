@@ -1,7 +1,10 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "index": "Start here",
+  "Software": "All Software",
+  "---": {
+    "type": "text"
+  },
+  "Hardware": "All Hardware",
   "about": {
     "title": "About",
     "type": "page"

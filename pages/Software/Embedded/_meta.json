@@ -1,0 +1,8 @@
+{
+  "OutdoorLocationEngine": {
+    "title": "OutdoorLocationEngine",
+    "...extra configurations...": "..."
+  },
+  "IndoorLocationEngine": "IndoorLocationEngine",
+  "HomeStation": "Home-Station"
+}
