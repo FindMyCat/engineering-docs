@@ -1,0 +1,36 @@
+# IndoorLocationEngine
+
+The IndoorLocationEngine is responsible for three things:
+
+- Advertise BLE packets for HomeStation and iOS application
+- Scan for packets from HomeStation
+- Command `OutdoorLocationEngine` (`PowerUp / PowerDown`)
+
+
+#### BLE Advertising
+The IndoorLocationEngine uses BLE Advertising packets to announce its location to the HomeStation.
+This is a really inexpensive way (battery consumption wise) to know whether the Tracker is near HomeStation or not since
+Bluetooth range is about 500 feet.
+
+The advertising interval can be configured via this constant in `ble.c`.
+
+``` c copy
+#define APP_ADV_INTERVAL_SLOW       3200    // (in units of 0.625 ms). This value corresponds to 2s)
+```
+
+#### BLE Scanning
+The IndoorLocationEngine scans for packets from the HomeStation, when the HomeStation packets are no longer received after a timeout it
+sends a command to the OutdoorLocationEngine to power up. Scanning is slightly more expensive than advertising on the battery so
+this is done at an interval with larger gaps than advertising.
+
+
+The scanning interval can be configured via this constant in `ble.c`.
+
+``` c copy
+#define NRF_BLE_SCAN_SCAN_INTERVAL  48000   // (30s)
+```
+
+#### Command OutdoorLocationEngine
+
+
+

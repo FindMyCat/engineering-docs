@@ -7,6 +7,7 @@ The OutdoorLocationEngine in essence does the following two things:
 
 The above two responsibilites are managed by the following sub-systems:
 
+## Concepts
 #### UDP Listener
 The `UDPListener` listens on port `12345` for Commands and relays them to the Dispatcher.
 
@@ -29,4 +30,4 @@ location reports according to the predefined interval.
 The LocationEngine is reponsible for communicating with the NRF-9160 modem and getting a location fix.
 It uses a fallback of Cellular location for when GNSS is unavailable.
 
-
+## Config Options
