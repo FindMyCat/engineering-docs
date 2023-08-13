@@ -12,7 +12,6 @@ The embedded software has three parts to it.
 
 These three firmwares are designed to play harmoniously together to optimize location accuracy and battery life.
 
-Keep reading to learn about the overall architecture of the Embedded Software.
 
 <br/>
 <hr/>
@@ -29,3 +28,9 @@ To put it simply, there are two ways to respond (report location), one internall
 and externally from the HomeStation. The goal is to use these two responders in a way that minimizes the usage of the device's valuable resource,
 the Tracker Battery, while still ensuring visibility of the device's location.
 
+Both HomeStation and Tracker PCB advertises BLE advertisement packets and scan for packets at different intervals to communicate visibility to each other.
+
+The HomeStation advertises BLE ADV packets every second which the IndoorLocationEngine scans for every 30s. While the packets
+are visible the IndoorLocationEngine puts the NRF-9160 in deep sleep and HomeStation reports the location via WiFi.
+
+The `IndoorLocationEngine` will activate the `OutdoorLocationEngine` along with it's periodic reporting when it doesn't see the `HomeStation` nearby.
