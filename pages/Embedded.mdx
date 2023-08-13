@@ -1,0 +1,31 @@
+import ImageProvider from "./ImageProvider";
+import embdeddedArchitectureLight from './Embedded/images/EmbeddedArchitectureLight.png'
+import embdeddedArchitectureDark from './Embedded/images/EmbeddedArchitectureDark.png'
+
+# Embedded Software
+
+The embedded software has three parts to it.
+
+- OutdoorLocationEngine
+- IndoorLocationEngine
+- HomeStation
+
+These three firmwares are designed to play harmoniously together to optimize location accuracy and battery life.
+
+Keep reading to learn about the overall architecture of the Embedded Software.
+
+<br/>
+<hr/>
+
+#### Overall Architecture
+
+<br/>
+
+<ImageProvider lightImage={embdeddedArchitectureLight} darkImage={embdeddedArchitectureDark}/>
+
+There are dedicated pages for each of the firmwares and how to configure them, but above is the overall bird-eye view.
+
+To put it simply, there are two ways to respond (report location), one internally from the Tracker PCB (Responder)
+and externally from the HomeStation. The goal is to use these two responders in a way that minimizes the usage of the device's valuable resource,
+the Tracker Battery, while still ensuring visibility of the device's location.
+

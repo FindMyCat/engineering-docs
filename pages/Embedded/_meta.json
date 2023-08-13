@@ -1,8 +1,8 @@
 {
   "OutdoorLocationEngine": {
-    "title": "OutdoorLocationEngine",
-    "...extra configurations...": "..."
+    "title": "OutdoorLocationEngine"
   },
   "IndoorLocationEngine": "IndoorLocationEngine",
-  "HomeStation": "Home-Station"
+  "HomeStation": "Home-Station",
+  "NRFCloud": "NRF Cloud Provisioning"
 }
