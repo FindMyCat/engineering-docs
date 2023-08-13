@@ -6,9 +6,9 @@ import embdeddedArchitectureDark from './Embedded/images/EmbeddedArchitectureDar
 
 The embedded software has three parts to it.
 
-- OutdoorLocationEngine
-- IndoorLocationEngine
-- HomeStation
+- `OutdoorLocationEngine`
+- `IndoorLocationEngine`
+- `HomeStation`
 
 These three firmwares are designed to play harmoniously together to optimize location accuracy and battery life.
 
@@ -33,4 +33,4 @@ Both HomeStation and Tracker PCB advertises BLE advertisement packets and scan f
 The HomeStation advertises BLE ADV packets every second which the IndoorLocationEngine scans for every 30s. While the packets
 are visible the IndoorLocationEngine puts the NRF-9160 in deep sleep and HomeStation reports the location via WiFi.
 
-The `IndoorLocationEngine` will activate the `OutdoorLocationEngine` along with it's periodic reporting when it doesn't see the `HomeStation` nearby.
+The `IndoorLocationEngine` activates the `OutdoorLocationEngine` along with its periodic reporting when it doesn't see the `HomeStation` nearby.
