@@ -5,6 +5,7 @@
     "title": "All Software"
   },
   "Embedded": "Embedded Software",
+  "NRFCloud": "NRF Cloud Provisioning",
   "CloudSetup": "Cloud Setup",
   "iOSApplication": "iOS Application",
   "--- Hardware": {

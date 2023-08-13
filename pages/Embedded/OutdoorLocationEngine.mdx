@@ -31,3 +31,12 @@ The LocationEngine is reponsible for communicating with the NRF-9160 modem and g
 It uses a fallback of Cellular location for when GNSS is unavailable.
 
 ## Config Options
+
+Following are the required config options to set before you can flash the firmware onto the Tracker.
+
+- `CONFIG_DEVICE_ID`: Set this to the same as the unique ble ID as scanned by the iOS app.
+- `CONFIG_NET_SAMPLE_MQTT_SN_GATEWAY_IP`: IPv4 address of Cloud instance.
+
+(optional)
+- `CONFIG_LTE_EDRX_REQ_VALUE_LTE_M`: controls how long device sleeps before being reachable for external commands.
+- `CONFIG_LOCATION_REFRESH_PERIOD_SECONDS`: Interval for location refreshes in non-lost mode. (60s default)

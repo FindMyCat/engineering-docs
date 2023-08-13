@@ -3,6 +3,5 @@
     "title": "OutdoorLocationEngine"
   },
   "IndoorLocationEngine": "IndoorLocationEngine",
-  "HomeStation": "Home-Station Tether",
-  "NRFCloud": "NRF Cloud Provisioning"
+  "HomeStation": "Home-Station Tether"
 }
