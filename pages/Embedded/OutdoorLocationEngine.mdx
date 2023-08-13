@@ -1,2 +1,32 @@
 # OutdoorLocationEngine
 
+The OutdoorLocationEngine in essence does the following two things:
+
+- Listen and Respond to External Commands
+- Report Location to the Cloud
+
+The above two responsibilites are managed by the following sub-systems:
+
+#### UDP Listener
+The `UDPListener` listens on port `12345` for Commands and relays them to the Dispatcher.
+
+#### GPIO Wake
+We listen on GPIO port 0; Pin 10. GPIO `P0.10` for `PowerUp (0)`/`PowerDown (1)` bit from the IndoorLocationEngine,
+this controls the power mode of the NRF-9160. When a PowerDown bit is received, the NRF-9160 puts itself into deep-sleep
+and wakes up on PowerUp interrupt.
+
+#### Dispatcher
+The role of the `Dispatcher` is to manage the `activation` and `idle` states of the `Responder`.
+It comes into play when commands are sent via UDP Listener or GPIO pin, in turn triggering the `Dispatcher` to initiate
+a callback to the Responder.
+
+#### Responder
+When directed to be in an activated state, the Responder takes charge of coordinating the processes that lead to the establishment of a
+connection with the MQTT-SN gateway. It then communicates with the LocationEngine to get a location fix and subsequently initiates periodic
+location reports according to the predefined interval.
+
+#### Location Engine
+The LocationEngine is reponsible for communicating with the NRF-9160 modem and getting a location fix.
+It uses a fallback of Cellular location for when GNSS is unavailable.
+
+
