@@ -1,10 +1,11 @@
 # IndoorLocationEngine
 
-The IndoorLocationEngine is responsible for three things:
+The IndoorLocationEngine is responsible for four things:
 
 - Advertise BLE packets for HomeStation and iOS application
 - Scan for packets from HomeStation
 - Command `OutdoorLocationEngine` (`PowerUp / PowerDown`)
+- Initiate Ranging with UltraWideband (Precise Indoor Finding)
 
 
 #### BLE Advertising
@@ -30,7 +31,6 @@ The scanning interval can be configured via this constant in `ble.c`.
 #define NRF_BLE_SCAN_SCAN_INTERVAL  48000   // (30s)
 ```
 
-#### Command OutdoorLocationEngine
 
 
 
