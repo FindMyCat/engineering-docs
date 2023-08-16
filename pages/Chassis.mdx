@@ -1,0 +1,58 @@
+import ImageProvider from "./ImageProvider";
+import PrinterImage from "./Chassis/images/3dPrinterPrinting.png";
+import Link from "next/link";
+import {DownloadCard} from "../components/DownloadFile";
+
+
+# 3D Printing
+
+This project involves some resin 3D printing to print the Tracker Body. Don't worry if you do not own or have access
+to a 3D printer, there are some external services that offer printing for really cheap.
+
+There are three parts to print for the Tracker.
+
+
+- Top Cover
+- Chassis
+- Bottom Cover
+
+<br/>
+
+<hr/>
+<br/>
+<ImageProvider lightImage={PrinterImage} darkImage={PrinterImage}/>
+
+
+### Print Files
+
+<DownloadCard fileName={"TopCover.stl"} fileLocation={"/docs/3dModels/CaseTopPart.stl"}/>
+<DownloadCard fileName={"Chassis.stl"} fileLocation={"/docs/3dModels/Chassis.stl"}/>
+<DownloadCard fileName={"BottomCover.stl"} fileLocation={"/docs/3dModels/CaseBottomPart.stl"}/>
+
+
+### Printer Settings
+I used two different resin colors for the chassis, the top and bottom cases are printed with white resin, and the middle
+chassis is printed with yellow resin to which I added some resin dye to get a darker shade or orange-yellow.
+
+Following are the settings that worked well for me for Elegoo Saturn 2 8K printer.
+
+| Setting                   | Value     |
+|---------------------------|-----------|
+| Layer Height              | 0.05mm    |
+| Bottom Layer Count        | 5         |
+| Exposure Time             | 4.500s    |
+| Bottom Exposure Time      | 35s       |
+
+I used the free version of Chitubox.
+
+### 3rd party priting services
+These are some 3D printing services that seems to have pretty good pricing, seems like a worthy try if you do not have
+access to a resin printer. (not sponsored)
+
+
+- <Link href="https://jlcpcb.com/3d-printing/CUL">JLC PCB 3D Printing</Link>
+- <Link href="https://www.wenext.com/">We Next</Link>
+- <Link href="https://www.taurus3d.com/">Taurus 3D</Link>
+
+
+
