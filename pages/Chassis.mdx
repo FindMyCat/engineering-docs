@@ -1,5 +1,6 @@
 import ImageProvider from "./ImageProvider";
 import PrinterImage from "./Chassis/images/3dPrinterPrinting.png";
+import PrintsCuring from "./Chassis/images/PrintsCuring.png";
 import Link from "next/link";
 import {DownloadCard} from "../components/DownloadFile";
 
@@ -24,6 +25,8 @@ with a traditional FDM printer. At-least in my experience.
 <hr/>
 <br/>
 <ImageProvider lightImage={PrinterImage} darkImage={PrinterImage}/>
+<br/>
+<ImageProvider darkImage={PrintsCuring} lightImage={PrintsCuring}/>
 
 
 ### Print Files
@@ -56,6 +59,7 @@ access to a resin printer. (not sponsored)
 - <Link href="https://jlcpcb.com/3d-printing/CUL" target={"_blank"}> JLC PCB 3D Printing</Link>
 - <Link href="https://www.wenext.com/" target={"_blank"}>We Next</Link>
 - <Link href="https://www.taurus3d.com/" target={"_blank"}>Taurus 3D</Link>
+
 
 
 
