@@ -1,0 +1,41 @@
+import KicadWindows from "./CircuitBoard/images/KicadWindows.png";
+import AntennaConsolidationDark from "./CircuitBoard/images/AntennaConsolidationDark.png";
+import AntennaConsolidationLight from "./CircuitBoard/images/AntennaConsolidationLight.png";
+import ImageProvider from "./ImageProvider";
+import {DownloadCard} from "../components/DownloadFile";
+
+# FindMyCat PCB
+
+The PCB is the heart of FindMyCat. It is a 4 layer board with a couple BGAs and Impedance controlled traces for Antennas with
+components placed on both sides of the PCB.
+
+<br/>
+<ImageProvider lightImage={KicadWindows} darkImage={KicadWindows}/>
+
+### Manufacturing notes
+Following are important considerations when manufacturing the PCB.
+- LTE and GPS Traces must be impedance controlled at 50Ω impedance.
+- All VIAs must be filled and capped. (VIA in Pad)
+- Prefer the <a href="https://en.wikipedia.org/wiki/Electroless_nickel_immersion_gold" target="_blank"> `ENIG`</a> surface finish since BGA components are involved.
+
+### Downloads
+These are the files you should need to manufacture the PCB. The Gerber files also have the drill files zipped.
+#### Gerber Files
+<DownloadCard fileName="FindMyCat-Gerber.zip" fileLocation="/docs/PCBFiles/FindMyCat-Gerber.zip"/>
+
+#### PCB Schematic
+<DownloadCard fileName="FindMyCat-Schematic.pdf" fileLocation="/docs/PCBFiles/FindMyCat-Schematic.pdf"/>
+
+
+### Future Improvements
+Following are the improvements I would make when doing a future PCB design revision.
+- <strong>Avoiding BGAs when possible</strong>: While BGA components provide a compact design, they substantially increase manufacturing expenses.
+For instance, in order to produce a PCB compatible with BGAs, the manufacturer must accommodate VIA in pad,
+ENIG surface finish, and X-Ray inspection for post-assembly. These requirements collectively contribute to a considerable cost.
+I think there is enough space on the FindMyCat PCB currently that some BGA components could be swapped for more easily manufacturable alternative SMD package.
+
+- <strong>Consolidating Antennas</strong>: Since the NRF-9160 only uses LTE or GPS radio at one time, the two antennas could be consolidated into one.
+Something like the following, an RF switch that has two different Matching networks, one for GPS and another for LTE. With a selector signal, the RF Switch could connect
+either one of them to the RF inputs of NRF-9160.
+
+<ImageProvider lightImage={AntennaConsolidationLight} darkImage={AntennaConsolidationDark}/>
