@@ -6,7 +6,6 @@
   },
   "CircuitBoard": "FindMyCat PCB",
   "Chassis": "3D Printing",
-  "SimCard": "SIM Card Provisioning",
   "Antenna": "Antenna Tuning",
   "--- Software": {
     "type": "separator",
@@ -20,6 +19,7 @@
     "type": "separator",
     "title": "Wrap up"
   },
+  "SimCard": "SIM Card Setup",
   "FinalAssembly": "Final Assembly",
   "about": {
     "title": "About",

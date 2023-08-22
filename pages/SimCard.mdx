@@ -1,0 +1,24 @@
+import {Steps} from "nextra/components";
+import SimSetup from "./SimCard/images/SIMSetup.png";
+import ImageProvider from "./ImageProvider";
+
+# SIM Card Setup
+
+The SIM card is from <a href="https://www.hologram.io/" target="_blank">Hologram IOT</a>.
+The FindMyCat software system depends on some aspects of Hologram APIs, such as the Hologram Cloud Data messaging, which is
+used for dispatching commands to the device. It is really difficult to make a low-power network reachable device
+but Hologram's API have made this possible.
+
+Furthermore, their subscription plans are quite affordable, and I consistently manage to remain within the confines of the free 1MB per month limit for my device's data usage.
+
+<Steps>
+    ### Activate Hologram SIM
+    Follow the instructions in the link here to activate your Hologram SIM.
+    https://support.hologram.io/hc/en-us/articles/360035697873-How-do-I-activate-SIMs-
+
+    ### Change Hologram Device Name to FindMyCat Device ID
+    This step is important because the FindMyCat iOS queries devices from Hologram REST api using the FindMyCat device ID.
+    You can find the Device Id under FindMyCat iOS App, in the edit option for the device.
+
+    <ImageProvider lightImage={SimSetup} darkImage={SimSetup}/>
+    </Steps>
