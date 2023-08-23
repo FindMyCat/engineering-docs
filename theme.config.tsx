@@ -12,7 +12,7 @@ const config: DocsThemeConfig = {
   },
   useNextSeoProps() {
     return {
-      titleTemplate: '%s – FindMyCat',
+      titleTemplate: '%s – FindMyCat Engineering',
     }
   },
   sidebar: {
