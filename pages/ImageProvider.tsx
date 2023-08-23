@@ -9,10 +9,10 @@ export const ImageProvider = (props: OwnProps) => {
     if (theme === 'system') {
         theme = systemTheme;
     }
-    if (theme === 'light') {
-        return <div><Image src={props.lightImage} alt={"LightImage"}/></div>
-    } else {
+    if (theme === 'dark') {
         return <div><Image src={props.darkImage} alt={"Dark Image"}/></div>
+    } else {
+        return <div><Image src={props.lightImage} alt={"LightImage"}/></div>
     }
 }
 

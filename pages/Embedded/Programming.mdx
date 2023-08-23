@@ -1,10 +1,37 @@
+import {Steps} from "nextra/components";
+
 # Programming
 
 There are three targets to flash firmwares onto.
 
-Main PCB:
+FindMyCat PCB:
 - NRF 9160: Runs the OutdoorLocationEngine firmware.
 - NRF 52833: Runs the IndoorLocationEngine firmware.
 
-HomeStation PCB:
+HomeStation PCB (NRF7002 DK):
 - NRF 52833 + NRF 7002: Runs the HomeStation application.
+
+You can use any J-Link based SWD programmer to program the firmwares using the SWD programming headers on the FindMyCat PCB.
+I used the NRF7002 DK that I then flashed the HomeStation firmware onto.
+
+<Steps>
+    ### Setup Development Environments
+    To program the above targets you will need to setup two development environments. First one is NRF-Connect with VSCode and the second one is
+    the SEGGER Embedded Studio for ARM v5.68. Please note the SEGGER version is important.
+
+    The official documentations are the best place to find in detail instructions for these:
+
+    1. NRF Connect SDK Setup <br/>
+    https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/installation.html
+
+    2. SEGGER Embedded Studio for ARM v5.68 Setup <br/>
+    https://www.segger.com/downloads/embedded-studio/
+
+    ### Clone repositories
+
+    Please find the appropriate repositories under FindMyCat main github.
+    // TODO: update this.
+
+
+    ### Flash!
+</Steps>

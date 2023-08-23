@@ -6,7 +6,6 @@
   },
   "CircuitBoard": "FindMyCat PCB",
   "Chassis": "3D Printing",
-  "Antenna": "Antenna Tuning",
   "--- Software": {
     "type": "separator",
     "title": "All Software"
