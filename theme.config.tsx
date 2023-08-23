@@ -4,9 +4,9 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   logo: <span>FindMyCat - Open Source Pet Tracker</span>,
   project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
+    link: 'https://github.com/FindMyCat/',
   },
-  docsRepositoryBase: 'https://github.com/FindMyCat/',
+  docsRepositoryBase: 'https://github.com/FindMyCat/engineering-docs',
   footer: {
     text: 'FindMyCat by ChitlangeSahas',
   },
