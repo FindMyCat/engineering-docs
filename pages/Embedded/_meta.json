@@ -1,7 +1,7 @@
 {
   "OutdoorLocationEngine": {
-    "title": "OutdoorLocationEngine"
+    "title": "Outdoor Location Engine"
   },
-  "IndoorLocationEngine": "IndoorLocationEngine",
-  "HomeStation": "Home-Station Tether"
+  "IndoorLocationEngine": "Indoor Location Engine",
+  "HomeStation": "Home-Station"
 }

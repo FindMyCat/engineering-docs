@@ -1,4 +1,6 @@
 import {Steps} from "nextra/components";
+import ImageProvider from "../ImageProvider";
+import ProgrammingTargets from "./images/ProgrammingTargets.png";
 
 # Programming
 
@@ -13,6 +15,9 @@ HomeStation PCB (NRF7002 DK):
 
 You can use any J-Link based SWD programmer to program the firmwares using the SWD programming headers on the FindMyCat PCB.
 I used the NRF7002 DK that I then flashed the HomeStation firmware onto.
+
+<br/>
+<ImageProvider darkImage={ProgrammingTargets} lightImage={ProgrammingTargets}/>
 
 <Steps>
     ### Setup Development Environments
