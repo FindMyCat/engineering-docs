@@ -17,6 +17,10 @@ const config: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 1
+  },
+  chat: {
+    link: "https://join.slack.com/t/findmycat/shared_invite/zt-21wo1f57m-zVcXlUkAvFmwDA3k5uYysw",
+    icon: "Join Slack"
   }
 }
 
