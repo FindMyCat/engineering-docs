@@ -1,0 +1,37 @@
+import {Steps} from "nextra/components";
+
+
+# iOS Application
+
+The FindMyCat iOS application is used to manage all your devices and track their realtime location etc.
+Once you successfully build and install it on your device using the following steps, you will be able to add/edit FindMyCat
+tracker devices and track their location.
+
+<Steps>
+    ### Download `FindMyCat/ios-app` repository.
+    Github Repository link: https://github.com/FindMyCat/ios-app
+
+    ```shell copy
+    git clone https://github.com/FindMyCat/ios-app.git
+    ```
+
+    ### Configure `Info.plist`
+    Open `FindMyCat.xcodeproj` in Xcode and configure the following in `Info.plist`
+    | Info.plist Key                       | Why                                                                                      |
+    | ------------------------------------ | ------------------------------------------------------------------------------------------------ |
+    | `HologramAPIKey`                     | Your Hologram API key, found in Hologram.io dashboard (settings page)                            |
+    | `HologramOrgId`                      | Your Hologram Org Id                                                                             |
+    | `MBXAccessToken`                     | Your Mapbox Public token                                                                         |
+    | `FindMyCat-Cloud-Hostname`            | Your FindMyCat Cloud `hostname:port`.                                   |
+    | `NSAppTransportSecurity/NSExceptionDomains` | Add FindMyCat-Cloud-Hostname to the `NSExceptionDomains`. Please see the note below on why this is needed |
+
+    ### Build and Run.
+    Click build in Xcode and you should be able to install in on your iPhone.
+</Steps>
+
+### Why HTTP and not HTTPS?
+As of now, I haven't been able to successfully set up HTTPS on my AWS account, which is why there's a `TODO` ([#1](https://github.com/FindMyCat/ios-app/issues/1)) to eventually switch to HTTPS for the app.
+This challenge likely stems from my limited experience with certificates and cybersecurity. To keep the project moving forward, I made the decision to use HTTP instead.
+
+If anyone is proficient in SSL/Certs and is willing to help with creating documentation for implementing HTTPS with AWS or self-hosting and would like to contribute, please don't hesitate to reach out via the Slack Channel.
+Your expertise would be greatly appreciated in incorporating HTTPS effectively.
