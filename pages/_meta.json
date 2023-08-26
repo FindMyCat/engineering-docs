@@ -19,5 +19,10 @@
     "title": "Wrap up"
   },
   "SimCard": "SIM Card Setup",
-  "FinalAssembly": "Final Assembly"
+  "FinalAssembly": "Final Assembly",
+  "--- TechnicalWhitepapers": {
+    "type": "separator",
+    "title": "Technical White Papers"
+  },
+  "TechnicalWhitePapers" : "Coming Soon"
 }
