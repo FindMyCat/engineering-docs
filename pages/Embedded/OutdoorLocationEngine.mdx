@@ -1,6 +1,6 @@
-# OutdoorLocationEngine
+# Outdoor Location Engine
 
-The OutdoorLocationEngine in essence does the following two things:
+The `outdoor-location-engine` is built on nRF Connect SDK (Zephyr) and in essence does the following two things:
 
 - Listen and Respond to External Commands
 - Report Location to the Cloud
@@ -35,7 +35,7 @@ It uses a fallback of Cellular location for when GNSS is unavailable.
 Following are the required config options to set before you can flash the firmware onto the Tracker.
 
 - `CONFIG_DEVICE_ID`: Set this to the same as the unique ble ID as scanned by the iOS app.
-- `CONFIG_NET_SAMPLE_MQTT_SN_GATEWAY_IP`: IPv4 address of Cloud instance.
+- `CONFIG_MQTT_SN_GATEWAY_IP`: IPv4 address of Cloud instance.
 
 (optional)
 - `CONFIG_LTE_EDRX_REQ_VALUE_LTE_M`: controls how long device sleeps before being reachable for external commands.
