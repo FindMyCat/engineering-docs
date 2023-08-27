@@ -20,6 +20,7 @@
   },
   "SimCard": "SIM Card Setup",
   "FinalAssembly": "Final Assembly",
+  "TrackerModes": "Tracker Modes",
   "--- TechnicalWhitepapers": {
     "type": "separator",
     "title": "Technical White Papers"
