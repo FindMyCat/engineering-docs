@@ -17,9 +17,9 @@ this controls the power mode of the NRF-9160. When a PowerDown bit is received, 
 and wakes up on PowerUp interrupt.
 
 #### Dispatcher
-The role of the `Dispatcher` is to manage the `activation` and `idle` states of the `Responder`.
+The role of the `Dispatcher` is to manage the `active`, `idle`, `ping` and `lost` mode state for the `Responder`.
 It comes into play when commands are sent via UDP Listener or GPIO pin, in turn triggering the `Dispatcher` to initiate
-a callback to the Responder.
+an appropriate callback to the Responder.
 
 #### Responder
 When directed to be in an activated state, the Responder takes charge of coordinating the processes that lead to the establishment of a
@@ -37,6 +37,7 @@ Following are the required config options to set before you can flash the firmwa
 - `CONFIG_DEVICE_ID`: Set this to the same as the unique ble ID as scanned by the iOS app.
 - `CONFIG_MQTT_SN_GATEWAY_IP`: IPv4 address of Cloud instance.
 
-(optional)
+(optional, for fine tuning)
 - `CONFIG_LTE_EDRX_REQ_VALUE_LTE_M`: controls how long device sleeps before being reachable for external commands.
-- `CONFIG_LOCATION_REFRESH_PERIOD_SECONDS`: Interval for location refreshes in non-lost mode. (60s default)
+- `CONFIG_ACTIVE_MODE_LOCATION_REFRESH_PERIOD_SECONDS`: Interval for location refreshes in active mode. (420s default (7 mins))
+- `CONFIG_LOST_MODE_LOCATION_REFRESH_PERIOD_SECONDS`: Interval for location refreshes in lost mode. (30s default)
