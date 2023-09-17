@@ -41,6 +41,13 @@ Since FindMyCat uses MQTT-SN for device to server communication, and MQTT-SN doe
 be a random string that isn't easily guess-able eg. `[}xRDvRP:kN*:8`.
 
 I will refer to this as `/your-chosen-topic-string` for this page.
+
+For additional security measures, you can change what port the MQTT-SN is configured at in `etc/emqx/plugins/emqx_sn.conf`
+
+```shell copy
+mqtt.sn.port = <new-port>
+```
+
 #### Create Webhook Resource
 
 1. Create a webhook resource for Traccar port `5055`. Use the following config:
