@@ -36,6 +36,7 @@ Following are the required config options to set before you can flash the firmwa
 
 - `CONFIG_DEVICE_ID`: Set this to the same as the unique ble ID as scanned by the iOS app.
 - `CONFIG_MQTT_SN_GATEWAY_IP`: IPv4 address of Cloud instance.
+- `CONFIG_MQTT_SN_PUBLISH_TOPIC`: Your MQTT topic string that device should publish to. (per [this step](/CloudSetup/EMQXConfiguration#choose-mqtt-topic-string))
 
 (optional, for fine tuning)
 - `CONFIG_LTE_EDRX_REQ_VALUE_LTE_M`: controls how long device sleeps before being reachable for external commands.
