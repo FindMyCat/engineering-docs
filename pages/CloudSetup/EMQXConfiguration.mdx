@@ -36,6 +36,11 @@ After enabling the above configuration the following pipline will be created:
 <ImageProvider lightImage={MqttSNPluginListeningLight} darkImage={MqttSNPluginListeningDark}/>
 
 
+#### Choose MQTT topic string
+Since FindMyCat uses MQTT-SN for device to server communication, and MQTT-SN does not yet support authentication, we must choose the topic name to which the device will publish to,
+be a random string that isn't easily guess-able eg. `[}xRDvRP:kN*:8`.
+
+I will refer to this as `/your-chosen-topic-string` for this page.
 #### Create Webhook Resource
 
 1. Create a webhook resource for Traccar port `5055`. Use the following config:
@@ -56,9 +61,9 @@ SELECT
   nth(4, split(payload.msg, ',')) as accuracy,
   clientid
 FROM
-  "/location"
+  "/your-chosen-topic-string"
 ```
-This tells the Rule engine to listen on topic `/location` for any messages and extract the `latitude`, `longitude`, `satellites`, `accuracy`
+This tells the Rule engine to listen on mqtt topic `/your-chosen-topic-string` for any messages and extract the `latitude`, `longitude`, `satellites`, `accuracy`
 to be passed over to the webhook that makes the `POST` request.
 
 ##### Add Rule Action
