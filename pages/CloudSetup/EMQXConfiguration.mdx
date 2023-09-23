@@ -66,6 +66,7 @@ SELECT
   nth(2, split(payload.msg, ',')) as longitude,
   nth(3, split(payload.msg, ',')) as satellites,
   nth(4, split(payload.msg, ',')) as accuracy,
+  nth(5, split(payload.msg, ',')) as batt_lvl,
   clientid
 FROM
   "/your-chosen-topic-string"
