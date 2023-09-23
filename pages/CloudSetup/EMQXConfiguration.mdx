@@ -71,7 +71,7 @@ SELECT
 FROM
   "/your-chosen-topic-string"
 ```
-This tells the Rule engine to listen on mqtt topic `/your-chosen-topic-string` for any messages and extract the `latitude`, `longitude`, `satellites`, `accuracy`
+This tells the Rule engine to listen on mqtt topic `/your-chosen-topic-string` for any messages and extract the `latitude`, `longitude`, `satellites`, `accuracy` and `battery_level`
 to be passed over to the webhook that makes the `POST` request.
 
 ##### Add Rule Action
