@@ -13,6 +13,7 @@
   "Embedded": "Embedded Software",
   "NRFCloud": "NRF Cloud Provisioning",
   "CloudSetup": "Cloud Setup",
+  "Hosting": "Cloud Hosting",
   "iOSApplication": "iOS Application",
   "--- Final": {
     "type": "separator",
