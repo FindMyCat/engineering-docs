@@ -1,8 +1,8 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
-import slack from "./public/slack.png"
+import discord from "./public/Discord_Symbol_Color/Discord-Symbol-Blurple.png"
 import Image from "next/image";
-import {SLACK_INVITE_LINK, PROJECT_FULL_NAME} from "./constants";
+import {DISCORD_INVITE_LINK, PROJECT_FULL_NAME} from "./constants";
 
 const config: DocsThemeConfig = {
   logo: <span>{PROJECT_FULL_NAME}</span>,
@@ -22,8 +22,8 @@ const config: DocsThemeConfig = {
     defaultMenuCollapseLevel: 1
   },
   chat: {
-    link: SLACK_INVITE_LINK,
-    icon: <Image src={slack} width={25} alt={"slack"}/>
+    link: DISCORD_INVITE_LINK,
+    icon: <Image src={discord} width={25} alt={"discord"}/>
   }
 }
 
