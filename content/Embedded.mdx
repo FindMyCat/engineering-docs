@@ -1,0 +1,36 @@
+import ImageProvider from "../components/ImageProvider";
+import embdeddedArchitectureLight from './Embedded/images/EmbeddedArchitectureLight.png'
+import embdeddedArchitectureDark from './Embedded/images/EmbeddedArchitectureDark.png'
+import ProgrammingTargets from "./Embedded/images/ProgrammingTargets.png";
+
+# Embedded Software
+
+The embedded software has three parts to it.
+
+- `outdoor-location-engine`
+- `indoor-location-engine`
+- `homestation`
+
+These three firmwares are designed to play harmoniously together to optimize location accuracy and battery life.
+
+<ImageProvider darkImage={ProgrammingTargets} lightImage={ProgrammingTargets}/>
+
+
+## Overall Architecture
+
+<br/>
+
+<ImageProvider lightImage={embdeddedArchitectureLight} darkImage={embdeddedArchitectureDark}/>
+
+There are dedicated pages for each of the firmwares and how to configure them, but above is the overall bird-eye view.
+
+To put it simply, there are two ways to respond (report location), one internally from the Tracker PCB (Responder)
+and externally from the HomeStation. The goal is to use these two responders in a way that minimizes the usage of the device's valuable resource,
+the Tracker Battery, while still ensuring visibility of the device's location.
+
+Both HomeStation and Tracker PCB advertises BLE advertisement packets and scan for packets at different intervals to communicate visibility to each other.
+
+The HomeStation advertises BLE ADV packets every second which the IndoorLocationEngine scans for every 30s. While the packets
+are visible the IndoorLocationEngine puts the NRF-9160 in deep sleep and HomeStation reports the location via WiFi.
+
+The `IndoorLocationEngine` activates the `OutdoorLocationEngine` along with its periodic reporting when it doesn't see the `HomeStation` nearby.

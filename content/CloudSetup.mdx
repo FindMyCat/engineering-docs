@@ -1,0 +1,132 @@
+import {ImageProvider} from "../components/ImageProvider";
+import cloudOverviewImageLight from "./CloudSetup/images/CloudSetupOverviewLight.png"
+import cloudOverviewImageDark from "./CloudSetup/images/CloudSetupOverviewDark.png"
+
+# Cloud Setup
+
+The software's cloud segment consists of two primary components:
+
+- Traccar GPS Server
+- EMQX MQTT Broker
+
+The embedded software establishes communication via MQTT-SN with the MQTT-SN Gateway within EMQX MQTT broker.
+Each time a device transmits a message to the MQTT-SN gateway (over MQTT-SN protocol), a predefined rule is activated.
+This rule extracts pertinent device information like location coordinates, battery percentage, GPS accuracy etc
+and subsequently relays the message to the Traccar REST server utilizing the HTTP protocol.
+
+
+<br/>
+<br/>
+<br/>
+
+<ImageProvider lightImage={cloudOverviewImageLight} darkImage={cloudOverviewImageDark}/>
+
+<br/>
+
+import {Tabs, Steps} from 'nextra/components'
+
+<Tabs items={['Using Docker (recommended)', 'Manual Installation']}>
+    <Tabs.Tab>
+        The following instructions are to help you setup the FindMyCat cloud software using docker entirely. Most of the setup has been
+        automated and just involves running a couple start scripts. The only manual step is the Rule Engine configuration.
+
+        #### Pre-requisites:
+        Regardless of what operating system you choose to host on, make sure the following are installed on it.
+        - <a href={"https://docs.docker.com/engine/install/"} target={"_blank"}>Docker Engine Installed</a>
+        - <a href={"https://docs.docker.com/compose/install/"} target={"_blank"}>Docker Compose Installed</a>
+
+        <Steps>
+            ### Clone Cloud repository
+            Clone the FindMyCat Cloud repository. Github: https://github.com/FindMyCat/cloud
+
+            ```shell copy
+            git clone https://github.com/FindMyCat/cloud.git
+            ```
+
+            ### Start Traccar Server
+            The `docker-compose.traccar.yml` file holds the configuration needed to initiate the Traccar server with a suitable `traccar.xml`, and it ensures the correct ports are open.
+            ```shell copy
+            docker-compose -f docker-compose.traccar.yml up -d
+            ```
+
+            A successful run would output something like this:
+            ```shell
+            [+] Running 1/1
+            ✔ Container traccar  Started
+            ```
+
+            ### Start EMQX Broker
+            The `docker-compose.emqx.yml` file configures the EMQX Broker and enables the appropriate plugins for the Rule Engine and MQTT-SN gateway.
+
+            Start the EMQX Broker with:
+            ```shell copy
+            docker-compose -f docker-compose.emqx.yml up -d
+            ```
+
+            Observe a similar output for a successful run as the Traccar setup step.
+
+            ### Configure EMQX Rule Engine
+            Most of the setup for EMQX is already done in the previous step, the only thing to configure is the Rule Engine.
+            The Rule engine is responsible for forwarding the incoming MQTT messages from the tracker device / homestation and relay them to Traccar server.
+
+
+            Follow these <a style={{color: 'hsl(var(--nextra-primary-hue)100% 45%/var(--tw-text-opacity))'}} href={"/docs/CloudSetup/EMQXConfiguration#choose-mqtt-topic-string"}> steps here </a> to configure the EMQX Rule Engine.
+            You can skip the "Enable MQTT-SN Gateway" step as it was already taken care by the docker file.
+
+        </Steps>
+
+
+
+
+    </Tabs.Tab>
+
+
+    <Tabs.Tab>
+        <i> The Manual installation instructions assume you are using Amazon Linux 2.</i>
+        <>
+
+            #### Setup EMQX MQTT Broker
+
+            1. Download EMQX <code>v4.4.19</code>
+            ```shell copy
+            wget https://www.emqx.com/en/downloads/broker/4.4.19/emqx-4.4.19-otp24.3.4.2-1-amzn2-amd64.rpm
+            ```
+
+            2. Install EMQX
+            ``` shell copy
+            sudo yum install emqx-4.4.19-otp24.3.4.2-1-amzn2-amd64.rpm -y
+            ```
+
+            3. Start EMQX
+            ``` shell copy
+            sudo systemctl start emqx
+            ```
+
+            4. You should see EMQX Dashboard UI on port `18083`. (`https://Your_AWS_Public_DNS:18083`)
+
+            #### Setup Traccar GPS Server
+
+            1. Download Traccar server <code>v5.8</code> and extract
+            ```shell copy
+            wget https://github.com/traccar/traccar/releases/download/v5.8/traccar-linux-64-5.8.zip
+            unzip traccar-linux-64-5.8.zip
+            ```
+
+            2. Execute <strong>traccar.run</strong> file
+            ``` shell copy
+            cd traccar-linux-64-5.8
+            sudo ./traccar.run
+            ```
+
+            3. Start Traccar service
+            ``` shell copy
+            sudo systemctl start traccar
+            ```
+
+            4. You should see the Traccar UI on port `8082` (`https://Your_AWS_Public_DNS:8082`)
+
+        </>
+    </Tabs.Tab>
+</Tabs>
+
+

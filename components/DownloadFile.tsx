@@ -1,5 +1,5 @@
+'use client'
 import styles from './DownloadFile.module.scss';
-import { Cards, Card } from 'nextra/components'
 
 interface OwnProps {
     fileName: string
