@@ -1,0 +1,35 @@
+# Tracker Modes
+
+There are four modes the tracker can be in.
+
+#### Near Home
+When the tracker is near home, the firmware stays in ultra sleep mode with all peripherals turned off. It still stays connected to the cloud over the HomeStation tether.
+
+The current consumption is absolute minimum and device location is visible at a refresh rate of 10 seconds.
+
+#### Ping mode
+When the tracker leaves the vicinity of your house, the firmware will switch to Ping mode. This is where the device will send back location when
+ping-ed from the iOS app.
+
+This is useful when you want to know the location of your pet on demand, but not necessarily keep a location history.
+
+#### Active mode
+When commanded to be in Active mode, the firmware starts reporting its location every 7 minutes until commanded to stop.
+
+#### Lost mode
+In the lost mode, the tracker will report its location with a very high frequency at 30s interval.
+
+
+#### Summary
+
+Battery capacity: 350mAh
+
+| Mode                                 | Avg Current            | Battery life |
+|--------------------------------------|------------------------|--------------|
+| At Home                              | 18uA                   | ~2 years     |
+| Ping Mode                            | 40uA                   | ~1 year      |
+| Active Mode (12 hrs/day)*            | 1mA                    |  3 weeks     |
+| Lost Mode                            | 15mA                   |  20 hours    |
+
+
+<i>\* Assuming pet stays outdoors 12hrs a day, and returns home.</i>

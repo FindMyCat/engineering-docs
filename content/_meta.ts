@@ -1,0 +1,18 @@
+export default {
+  index: 'Start here 👋',
+  hardware_sep: { type: 'separator', title: 'All Hardware' },
+  CircuitBoard: 'FindMyCat PCB',
+  Chassis: '3D Printing',
+  software_sep: { type: 'separator', title: 'All Software' },
+  Embedded: 'Embedded Software',
+  NRFCloud: 'NRF Cloud Provisioning',
+  CloudSetup: 'Cloud Setup',
+  Hosting: 'Cloud Hosting',
+  iOSApplication: 'iOS Application',
+  final_sep: { type: 'separator', title: 'Wrap up' },
+  SimCard: 'SIM Card Setup',
+  FinalAssembly: 'Final Assembly',
+  TrackerModes: 'Tracker Modes',
+  whitepapers_sep: { type: 'separator', title: 'Technical White Papers' },
+  TechnicalWhitePapers: 'Coming Soon',
+}

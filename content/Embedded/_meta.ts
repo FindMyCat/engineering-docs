@@ -1,0 +1,5 @@
+export default {
+  OutdoorLocationEngine: { title: 'Outdoor Location Engine' },
+  IndoorLocationEngine: 'Indoor Location Engine',
+  HomeStation: 'Home-Station',
+}

@@ -1,0 +1,61 @@
+import ImageProvider from "./ImageProvider";
+import AGPSSimplifiedLight from "./NRFCloud/images/AGPSSimplified.png"
+import AGPSSimplifiedDark from "./NRFCloud/images/AGPSSimplifiedDark.png";
+import {Steps} from "nextra/components";
+
+# NRF Cloud Provisioning
+
+NRF Cloud is a service by Nordic semiconductors that offers Location Service APIs. We specifically use
+the Assisted GPS (AGPS) Location service to speed up the Time To First Fix (TTFF). The NRF Cloud API provides
+the Almanac and Ephemeris data over the internet. Their free plan gets you 500 location requests per month.
+
+## AGPS: Explained Simply
+The basic concept behind assisted GPS is to use a faster medium of communication channel such as the internet link
+instead of the satellite link where transfer speeds are in the range of 50bits/s.
+
+Picture that we need 4 different packages to get a location fix. A-GPS provides us with the first 3 over a fast data link
+like a cellular connection, so we only rely on the slower link for the last small piece.
+
+<ImageProvider lightImage={AGPSSimplifiedLight} darkImage={AGPSSimplifiedDark}/>
+
+## Provision device with NRF Cloud
+For the firmware to be communicate with NRF cloud over HTTPS protocol, we need to do two things: Generate the appropriate credentials and install
+them on the NRF-9160 using the helper script in `certificate_provisioning.c` file.
+<Steps>
+
+
+### Generate Device Credentials
+    Please follow the instructions in this Nordic Documentation page for generating the device credentials from a terminal.
+
+    https://docs.nrfcloud.com/Devices/Security/Credentials.html#generating-credentials-on-a-computer
+
+    You should have 3 files generated upon following the above steps:
+        - Device Certificate
+        - Private Key
+        - AWS Root CA Certificate
+
+### Write Credentials to NRF-9160 Flash
+    I wrote helper scripts to help load these credentials into the NRF-9160 Flash memory. It uses `AT` Commands to write to the flash storage.
+    The script files are located under `certificate_provisioning` directory in the `OutdoorLocationEngine` repository.
+
+    You would just need to change the following constants to point them to your respective credential files:
+
+    ``` c filename="certificate_provisioning.c"
+    static const char PRIVATE_KEY[] = {
+        #include "./certs/CA_certs/device_private_key.pem"
+    };
+
+    static const char DEVICE_CERTIFICATE[] = {
+        #include "./certs/CA_certs/device_certificate.pem"
+    };
+
+    static const char AMAZON_ROOT_CA[] = {
+        #include "./certs/CA_certs/Amazon_CA_root.pem"
+    };
+
+    // and finally call this function.
+    certificate_provisioning_init();
+    ```
+
+
+</Steps>
