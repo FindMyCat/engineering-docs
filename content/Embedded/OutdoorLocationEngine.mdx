@@ -49,13 +49,14 @@ Following are the required config options to set before you can flash the firmwa
 
 <Steps>
 
-### Install nRF Connect for Desktop
+### Install nrfutil
 
-1. Download and install [nRF Connect for Desktop](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop)
-2. Open the **Toolchain Manager** inside it and install **nRF Connect SDK v2.9.2**
-3. Install the `nrfutil device` subcommand:
+Install nrfutil from the [Nordic Semiconductor website](https://www.nordicsemi.com/Products/Development-tools/nRF-Util/).
+
+### Install nRF Connect SDK toolchain
 
 ```bash copy
+nrfutil sdk-manager install v3.0.0
 nrfutil install device
 ```
 
