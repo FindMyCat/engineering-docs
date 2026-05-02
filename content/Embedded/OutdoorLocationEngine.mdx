@@ -86,7 +86,23 @@ make flash
 
 </Steps>
 
-#### Troubleshooting
+## Viewing Logs
+
+The firmware outputs logs over SEGGER RTT. To view them, open two terminals:
+
+**Terminal 1** - connect JLink to the nRF9160:
+```bash copy
+JLinkExe -device NRF9160_XXAA -if SWD -speed 4000 -autoconnect 1
+```
+
+**Terminal 2** - open the RTT log stream:
+```bash copy
+JLinkRTTClient
+```
+
+Keep Terminal 1 running while reading logs in Terminal 2.
+
+## Troubleshooting
 
 Build fails with a CMake cache error, do a clean build:
 ```bash copy
