@@ -1,6 +1,9 @@
 import {ImageProvider} from "../components/ImageProvider";
 import cloudOverviewImageLight from "./CloudSetup/images/CloudSetupOverviewLight.png"
 import cloudOverviewImageDark from "./CloudSetup/images/CloudSetupOverviewDark.png"
+import findMyCatCliDark from "./CloudSetup/images/FindMyCatCliDark.png"
+import traccarRegisterDark from "./CloudSetup/images/TraccarRegisterDark.png"
+import verifyCli from "./CloudSetup/images/VerifyCLI.png"
 
 # Cloud Setup
 
@@ -25,12 +28,105 @@ and subsequently relays the message to the Traccar REST server utilizing the HTT
 
 import {Tabs, Steps} from 'nextra/components'
 
-<Tabs items={['Using Docker (recommended)', 'Manual Installation']}>
-    <Tabs.Tab>
-        The following instructions are to help you setup the FindMyCat cloud software using docker entirely. Most of the setup has been
-        automated and just involves running a couple start scripts. The only manual step is the Rule Engine configuration.
+	You would run the following commands on the host computer you wish to host the FindMyCat cloud services on. Most people would likely use a Cloud Provider (see [Cloud providers](/CloudSetup#cloud-providers)) but it is also possible to self host.
 
-        #### Pre-requisites:
+<Tabs items={['Using automated script (recommended)', 'Using Docker', 'Manual Installation']}>
+    <Tabs.Tab>
+        The cloud repository contains a `findmycat.py` wrapper around four commands: `start`, `setup`, `verify` and `destroy`. The script is provided for convinience but if you prefer to install it with Docker or manually, please follow the instruction in the relevant tabs.
+
+
+        ### Pre-requisites
+        - <a href={"https://docs.docker.com/engine/install/"} target={"_blank"}>Docker Engine Installed (Tested on Docker version 29.7)</a>
+        - <a href={"https://docs.docker.com/compose/install/"} target={"_blank"}>Docker Compose V2</a> (Tested on v5.4)
+        - Python 3.8 or newer.
+
+        <Steps>
+            ### Clone Cloud repository
+            ```shell copy
+            git clone https://github.com/FindMyCat/cloud.git
+            cd cloud
+            ```
+
+            ### Start the stack
+            Brings up Traccar and EMQX, waits for both containers to come online.
+
+            ```shell copy
+            ./findmycat.py start --emqx-password 'something-long'
+            ```
+
+            `--emqx-password` replaces the EMQX dashboard's default `admin`/`public` login.
+	    
+	    A successful run looks like the following: 
+            <ImageProvider lightImage={findMyCatCliDark} darkImage={findMyCatCliDark}/>
+
+
+
+            ### Create the Traccar admin account
+            Traccar does not ship with a default administrator account, to create one, open its web UI on port `8082` and register. The script provides a reachable URL for convinience, you can click to open the Traccar UI. 
+
+
+            <ImageProvider lightImage={traccarRegisterDark} darkImage={traccarRegisterDark}/>
+
+            ### Configure the device and EMQX rule engine
+            Registers the device id in Traccar, creates the EMQX webhook resource, and creates the rule engine rule. Use Traccar credentials you used to create the admin account in step 3.
+
+            ```shell copy
+            ./findmycat.py setup \
+              --mqtt-topic '/your-chosen-topic-string' \
+              --traccar-email you@example.com \
+              --traccar-password 'your-password' \
+              --device-id your-device-id
+            ```
+
+            Both values have to match the outdoor location engine's `prj.conf`:
+
+            | Flag | Firmware setting |
+            | --- | --- |
+            | `--device-id` | `CONFIG_DEVICE_ID` |
+            | `--mqtt-topic` | `CONFIG_MQTT_SN_PUBLISH_TOPIC` |
+
+            MQTT-SN has no authentication, so pick a topic nobody can guess, such as `[}xRDvRP:kN*:8`.
+
+            ### Verify it end to end
+            Publishes a test position over MQTT-SN and reports which stage it reached, without needing a
+            real device.
+
+            ```shell copy
+            ./findmycat.py verify \
+              --mqtt-topic '/your-chosen-topic-string' \
+              --device-id your-device-id
+            ```
+
+            | Stage | Meaning |
+            | --- | --- |
+            | `gateway` | The message reached the broker on the right topic |
+            | `rule sql` | Fields were extracted from the payload |
+            | `traccar` | Traccar accepted the position |
+
+            Run this while the device is disconnected. MQTT-SN allows one live session per client id, so
+            publishing as the device's id would displace its session.
+
+	    Succesful run looks like this: 
+
+            <ImageProvider lightImage={verifyCli} darkImage={verifyCli}/>
+        </Steps>
+
+        ### Tearing it down
+
+        Stops the containers and removes the EMQX volumes, the Traccar database and its logs. It prints what it
+        would remove and does nothing unless you pass `--yes`.
+
+        ```shell copy
+        ./findmycat.py destroy --yes
+        ```
+
+    </Tabs.Tab>
+
+    <Tabs.Tab>
+    ## Using Docker
+        The following instructions are to help you setup the FindMyCat cloud software using docker entirely. Most of the setup has been automated and just involves running a couple start scripts. The only manual step is the Rule Engine configuration.
+
+        ### Pre-requisites
         Regardless of what operating system you choose to host on, make sure the following are installed on it.
         - <a href={"https://docs.docker.com/engine/install/"} target={"_blank"}>Docker Engine Installed</a>
         - <a href={"https://docs.docker.com/compose/install/"} target={"_blank"}>Docker Compose Installed</a>
@@ -82,6 +178,7 @@ import {Tabs, Steps} from 'nextra/components'
 
 
     <Tabs.Tab>
+    ## Manual Installation
         <i> The Manual installation instructions assume you are using Amazon Linux 2.</i>
         <>
 
@@ -128,5 +225,30 @@ import {Tabs, Steps} from 'nextra/components'
         </>
     </Tabs.Tab>
 </Tabs>
+
+## Cloud providers
+
+Any host with Docker works.
+
+### DigitalOcean
+
+| Setting | Value |
+| --- | --- |
+| Image | Ubuntu 24.04 LTS |
+| Size | 512 MB / 1 vCPU |
+
+Add 2 GB of swap. EMQX and Traccar do not both fit in 512 MB without it.
+
+```shell copy
+fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+```
+
+Firewall:
+
+| Port | Access |
+| --- | --- |
+| `1885/udp` | Public. The tracker connects here. |
+| `8082`, `18083`, `1883`, `5055` | Your IP only |
 
 
